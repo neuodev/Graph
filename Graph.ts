@@ -81,6 +81,7 @@ class Graph {
       let current = stack.pop();
       visited.add(current.label);
       for (const node of current.adjacencyList) {
+        if (visited.has(node)) continue;
         stack.push(this.map[node]);
       }
     }
