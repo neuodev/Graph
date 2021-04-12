@@ -88,21 +88,41 @@ class Graph {
     console.log(visited);
     return visited;
   }
+
+  BreathFirstSearch(root) {
+    let node = this.map[root];
+    if (node == null) return;
+    let visited = new Set();
+    let queue = [];
+    queue.push(node);
+    while (queue.length > 0) {
+      let current = queue.shift();
+      visited.add(current.label);
+      for (let n of current.adjacencyList) {
+        if (visited.has(n)) continue;
+        let nextNode = this.map[n];
+        queue.push(nextNode);
+      }
+    }
+    console.log(visited);
+    return visited;
+  }
 }
 
 const graph = new Graph();
 
+graph.addNode('X');
 graph.addNode('A');
 graph.addNode('B');
-graph.addNode('C');
-graph.addNode('D');
-graph.addEdge('A', 'B');
-graph.addEdge('A', 'C');
-graph.addEdge('B', 'D');
-graph.addEdge('D', 'C');
+graph.addNode('P');
+graph.addEdge('X', 'A');
+graph.addEdge('X', 'B');
+graph.addEdge('A', 'P');
+graph.addEdge('B', 'P');
 // graph.removeNode('Jone');
 // console.log(graph.removeEdge('Jone', 'Doe'));
 graph.DepthFirstTraversal('C');
 graph.DepthStack('A');
+graph.BreathFirstSearch('A');
 graph.print();
 // console.log(graph);
