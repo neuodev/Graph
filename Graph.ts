@@ -62,8 +62,8 @@ class Graph {
   }
   _DepthFirstTraversal(node, set) {
     set.add(node.label);
-    let adjacencyList = node.adjacencyList;
 
+    let adjacencyList = node.adjacencyList;
     if (adjacencyList.length === 0 || !node || set.has(adjacencyList[0]))
       return;
     let nextNode = this.map[adjacencyList[0]];
@@ -114,17 +114,17 @@ class Graph {
     for (let n in this.map) {
       this._topologicalSorting(this.map[n], visited, stack);
     }
-  
+
     let sorted = [];
     while (stack.length > 0) {
       sorted.push(stack.pop());
     }
-  
+
     return sorted;
   }
 
   _topologicalSorting(node: Vertex, visited: any, stack: string[]) {
-    if (visited.has(node.label)) return ;
+    if (visited.has(node.label)) return;
     visited.add(node.label);
 
     let adjacencyList = node.adjacencyList;
@@ -133,6 +133,27 @@ class Graph {
     }
     // we are in the very end
     stack.push(node.label);
+  }
+
+  hasCycle() {
+    let visiting = new Set();
+    let visited = new Set();
+    for (let n in this.map) {
+      this._hasCycle(this.map[n], visiting, visited);
+    }
+    console.log(visited);
+    console.log(visiting);
+  }
+
+  _hasCycle(node: Vertex, visiting, visited) {
+    if (visiting.has(node.label)) return console.log('has cycle ');
+    visiting.add(node.label);
+    let adjacencyList = node.adjacencyList;
+    for (let n of adjacencyList) {
+      this._hasCycle(this.map[n], visiting, visited);
+    }
+    visited.add(node.label);
+    visiting.delete(node.label);
   }
 }
 
@@ -152,5 +173,6 @@ graph.DepthFirstTraversal('C');
 graph.DepthStack('A');
 graph.BreathFirstSearch('A');
 graph.topologicalSorting();
+graph.hasCycle();
 graph.print();
 // console.log(graph);
