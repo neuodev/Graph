@@ -50,21 +50,36 @@ class Graph {
     adjacencyList.splice(idx, 1);
     return true;
   }
+
+  DepthFirstTraversal(node) {
+    if (!this.map[node]) return;
+    const set = new Set();
+    this._DepthFirstTraversal(node, set);
+    console.log(set);
+  }
+  _DepthFirstTraversal(node, set) {
+    node = this.map[node];
+    set.add(node.label);
+    let adjacencyList = node.adjacencyList;
+
+    if (adjacencyList.length === 0 || !node || set.has(adjacencyList[0]))
+      return;
+    this._DepthFirstTraversal(adjacencyList[0], set);
+  }
 }
 
 const graph = new Graph();
 
-graph.addNode('Jone');
-graph.addNode('Doe');
-graph.addNode('Jane');
-graph.addEdge('Jone', 'Doe');
-graph.addEdge('Jone', 'Jane');
-graph.addEdge('Jone', 'Jone');
-graph.addEdge('Doe', 'Jone');
-graph.addEdge('Doe', 'Jane');
-graph.addEdge('Jane', 'Doe');
-graph.addEdge('Jane', 'Jone');
+graph.addNode('A');
+graph.addNode('B');
+graph.addNode('C');
+graph.addNode('D');
+graph.addEdge('A', 'B');
+graph.addEdge('A', 'C');
+graph.addEdge('B', 'D');
+graph.addEdge('D', 'C');
 // graph.removeNode('Jone');
-console.log(graph.removeEdge('Jone', 'Doe'));
+// console.log(graph.removeEdge('Jone', 'Doe'));
+graph.DepthFirstTraversal('B');
 graph.print();
-console.log(graph);
+// console.log(graph);
