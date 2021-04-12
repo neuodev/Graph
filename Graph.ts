@@ -139,21 +139,26 @@ class Graph {
     let visiting = new Set();
     let visited = new Set();
     for (let n in this.map) {
-      this._hasCycle(this.map[n], visiting, visited);
+      const isCycle = this._hasCycle(this.map[n], visiting, visited);
+
+      if (isCycle) return true;
     }
     console.log(visited);
     console.log(visiting);
+    return false;
   }
 
   _hasCycle(node: Vertex, visiting, visited) {
-    if (visiting.has(node.label)) return console.log('has cycle ');
     visiting.add(node.label);
     let adjacencyList = node.adjacencyList;
     for (let n of adjacencyList) {
-      this._hasCycle(this.map[n], visiting, visited);
+      if (visited.has(n)) continue;
+      if (visiting.has(n)) return true;
+      if (this._hasCycle(this.map[n], visiting, visited)) return true;
     }
     visited.add(node.label);
     visiting.delete(node.label);
+    return false;
   }
 }
 
@@ -161,18 +166,16 @@ const graph = new Graph();
 
 graph.addNode('A');
 graph.addNode('B');
-graph.addNode('D');
 graph.addNode('C');
 graph.addEdge('A', 'B');
-graph.addEdge('A', 'C');
 graph.addEdge('B', 'C');
-graph.addEdge('D', 'A');
+graph.addEdge('C', 'A');
 // graph.removeNode('Jone');
 // console.log(graph.removeEdge('Jone', 'Doe'));
 // graph.DepthFirstTraversal('C');
 // graph.DepthStack('A');
 // graph.BreathFirstSearch('A');
 // graph.topologicalSorting();
-graph.hasCycle();
+console.log(graph.hasCycle());
 // graph.print();
 // console.log(graph);
