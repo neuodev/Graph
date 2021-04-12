@@ -30,6 +30,16 @@ class Graph {
       }
     }
   }
+
+  removeNode(label: string) {
+    if (!this.map[label]) return false;
+    delete this.map[label];
+    for (let n in this.map) {
+      let adjacencyList = this.map[n].adjacencyList;
+      const idx = adjacencyList.indexOf(label);
+      adjacencyList.splice(idx, 1);
+    }
+  }
 }
 
 const graph = new Graph();
@@ -44,5 +54,6 @@ graph.addEdge('Doe', 'Jone');
 graph.addEdge('Doe', 'Jane');
 graph.addEdge('Jane', 'Doe');
 graph.addEdge('Jane', 'Jone');
+graph.removeNode('Jone');
 graph.print();
 console.log(graph);
