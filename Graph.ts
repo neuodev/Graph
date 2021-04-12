@@ -12,10 +12,11 @@ class Graph {
     const vertex = new Vertex(label);
     if (!this.map[label]) this.map[label] = vertex;
   }
-  
+
 }
 
 const graph = new Graph();
+
 graph.addNode('Jone');
 graph.addNode('Doe');
 graph.addNode('Jane');
