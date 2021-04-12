@@ -14,9 +14,21 @@ class Graph {
   }
 
   addEdge(from: string, to: string) {
+    if (from === to) return;
     // check if the vertex exsit
     if (!this.map[from] || !this.map[to]) return false;
     this.map[from].adjacencyList.push(to);
+  }
+  print() {
+    for (const node in this.map) {
+      if (Object.prototype.hasOwnProperty.call(this.map, node)) {
+        console.log(
+          `${node} is Connected with [${this.map[
+            node
+          ].adjacencyList.toString()}]`
+        );
+      }
+    }
   }
 }
 
@@ -25,6 +37,12 @@ const graph = new Graph();
 graph.addNode('Jone');
 graph.addNode('Doe');
 graph.addNode('Jane');
-console.log(graph.addEdge('Jone', 'Doe'));
-
+graph.addEdge('Jone', 'Doe');
+graph.addEdge('Jone', 'Jane');
+graph.addEdge('Jone', 'Jone');
+graph.addEdge('Doe', 'Jone');
+graph.addEdge('Doe', 'Jane');
+graph.addEdge('Jane', 'Doe');
+graph.addEdge('Jane', 'Jone');
+graph.print();
 console.log(graph);
