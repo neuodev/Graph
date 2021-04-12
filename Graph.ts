@@ -114,12 +114,12 @@ class Graph {
     for (let n in this.map) {
       this._topologicalSorting(this.map[n], visited, stack);
     }
-    console.log(visited);
+  
     let sorted = [];
     while (stack.length > 0) {
       sorted.push(stack.pop());
     }
-    console.log(sorted);
+  
     return sorted;
   }
 
