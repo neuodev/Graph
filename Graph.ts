@@ -78,9 +78,9 @@ class Graph {
     stack.push(node);
 
     while (stack.length > 0) {
-      let removedNode = stack.pop();
-      visited.add(removedNode.label);
-      for (const node of removedNode.adjacencyList) {
+      let current = stack.pop();
+      visited.add(current.label);
+      for (const node of current.adjacencyList) {
         stack.push(this.map[node]);
       }
     }
