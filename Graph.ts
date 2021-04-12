@@ -159,20 +159,20 @@ class Graph {
 
 const graph = new Graph();
 
-graph.addNode('X');
 graph.addNode('A');
 graph.addNode('B');
-graph.addNode('P');
-graph.addEdge('X', 'A');
-graph.addEdge('X', 'B');
-graph.addEdge('A', 'P');
-graph.addEdge('B', 'P');
+graph.addNode('D');
+graph.addNode('C');
+graph.addEdge('A', 'B');
+graph.addEdge('A', 'C');
+graph.addEdge('B', 'C');
+graph.addEdge('D', 'A');
 // graph.removeNode('Jone');
 // console.log(graph.removeEdge('Jone', 'Doe'));
-graph.DepthFirstTraversal('C');
-graph.DepthStack('A');
-graph.BreathFirstSearch('A');
-graph.topologicalSorting();
+// graph.DepthFirstTraversal('C');
+// graph.DepthStack('A');
+// graph.BreathFirstSearch('A');
+// graph.topologicalSorting();
 graph.hasCycle();
-graph.print();
+// graph.print();
 // console.log(graph);
