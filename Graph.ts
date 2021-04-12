@@ -1,9 +1,9 @@
 class Vertex {
   label: string;
-  map: object;
+  adjacencyList: object;
   constructor(label) {
     this.label = label;
-    this.map = {};
+    this.adjacencyList = {};
   }
 }
 class Graph {
@@ -13,6 +13,9 @@ class Graph {
     if (!this.map[label]) this.map[label] = vertex;
   }
 
+  addEdge(from: string, to: string) {
+      
+  }
 }
 
 const graph = new Graph();
