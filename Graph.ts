@@ -56,6 +56,7 @@ class Graph {
     const set = new Set();
     this._DepthFirstTraversal(node, set);
     console.log(set);
+    return set;
   }
   _DepthFirstTraversal(node, set) {
     node = this.map[node];
