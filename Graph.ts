@@ -107,6 +107,33 @@ class Graph {
     console.log(visited);
     return visited;
   }
+
+  topologicalSorting() {
+    let visited = new Set();
+    let stack = [];
+    for (let n in this.map) {
+      this._topologicalSorting(this.map[n], visited, stack);
+    }
+    console.log(visited);
+    let sorted = [];
+    while (stack.length > 0) {
+      sorted.push(stack.pop());
+    }
+    console.log(sorted);
+    return sorted;
+  }
+
+  _topologicalSorting(node: Vertex, visited: any, stack: string[]) {
+    if (visited.has(node.label)) return console.log('what');
+    visited.add(node.label);
+
+    let adjacencyList = node.adjacencyList;
+    for (let n in adjacencyList) {
+      this._topologicalSorting(this.map[adjacencyList[n]], visited, stack);
+    }
+    // we are in the very end
+    stack.push(node.label);
+  }
 }
 
 const graph = new Graph();
@@ -124,5 +151,6 @@ graph.addEdge('B', 'P');
 graph.DepthFirstTraversal('C');
 graph.DepthStack('A');
 graph.BreathFirstSearch('A');
+graph.topologicalSorting();
 graph.print();
 // console.log(graph);
