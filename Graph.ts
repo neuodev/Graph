@@ -124,7 +124,7 @@ class Graph {
   }
 
   _topologicalSorting(node: Vertex, visited: any, stack: string[]) {
-    if (visited.has(node.label)) return console.log('what');
+    if (visited.has(node.label)) return ;
     visited.add(node.label);
 
     let adjacencyList = node.adjacencyList;
