@@ -8,7 +8,6 @@ class Vertex {
 }
 class Graph {
   map = {};
-
   addNode(label: string) {
     const vertex = new Vertex(label);
     if (!this.map[label]) this.map[label] = vertex;
