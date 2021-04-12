@@ -51,21 +51,41 @@ class Graph {
     return true;
   }
 
-  DepthFirstTraversal(node) {
-    if (!this.map[node]) return;
+  DepthFirstTraversal(root) {
+    let node = this.map[root];
+
+    if (!node) return;
     const set = new Set();
     this._DepthFirstTraversal(node, set);
     console.log(set);
     return set;
   }
   _DepthFirstTraversal(node, set) {
-    node = this.map[node];
     set.add(node.label);
     let adjacencyList = node.adjacencyList;
 
     if (adjacencyList.length === 0 || !node || set.has(adjacencyList[0]))
       return;
-    this._DepthFirstTraversal(adjacencyList[0], set);
+    let nextNode = this.map[adjacencyList[0]];
+    this._DepthFirstTraversal(nextNode, set);
+  }
+
+  DepthStack(root) {
+    let node = this.map[root];
+    if (!node) return;
+    let stack = [];
+    let visited = new Set();
+    stack.push(node);
+
+    while (stack.length > 0) {
+      let removedNode = stack.pop();
+      visited.add(removedNode.label);
+      for (const node of removedNode.adjacencyList) {
+        stack.push(this.map[node]);
+      }
+    }
+    console.log(visited);
+    return visited;
   }
 }
 
@@ -81,6 +101,7 @@ graph.addEdge('B', 'D');
 graph.addEdge('D', 'C');
 // graph.removeNode('Jone');
 // console.log(graph.removeEdge('Jone', 'Doe'));
-graph.DepthFirstTraversal('B');
+graph.DepthFirstTraversal('C');
+graph.DepthStack('A');
 graph.print();
 // console.log(graph);
