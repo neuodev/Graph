@@ -1,9 +1,9 @@
 class Vertex {
   label: string;
-  adjacencyList: object;
+  adjacencyList: [];
   constructor(label) {
     this.label = label;
-    this.adjacencyList = {};
+    this.adjacencyList = [];
   }
 }
 class Graph {
@@ -14,7 +14,9 @@ class Graph {
   }
 
   addEdge(from: string, to: string) {
-      
+    // check if the vertex exsit
+    if (!this.map[from] || !this.map[to]) return false;
+    this.map[from].adjacencyList.push(to);
   }
 }
 
@@ -23,4 +25,6 @@ const graph = new Graph();
 graph.addNode('Jone');
 graph.addNode('Doe');
 graph.addNode('Jane');
+console.log(graph.addEdge('Jone', 'Doe'));
+
 console.log(graph);
